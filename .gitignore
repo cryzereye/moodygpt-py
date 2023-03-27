@@ -1,2 +1,5 @@
 get-pip.py
-config.json
+config/*
+__pycache__/*
+*.pyc
+.vscode/
