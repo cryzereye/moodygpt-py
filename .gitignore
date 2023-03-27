@@ -1,2 +1,3 @@
 get-pip.py
 config.json
+*/__pycache__
