@@ -58,8 +58,6 @@ def get_mode(mode):
     else: []
 
 def append_mode(user, mode):
-    print(mode)
     mode_messages = get_mode(mode)
-    if(not(userdata[user]["mode"] == mode)):
-        for msg in mode_messages:
-            save_message(user, msg)
+    for msg in mode_messages:
+        save_message(user, msg)
