@@ -21,7 +21,7 @@ openai.api_key = config["openai"]["SECRET_KEY"]
 model_engine = 'gpt-3.5-turbo'
 
 # Define a function to send a message to ChatGPT and return the response
-def generate_response(prompt):
+def generate_response(user, prompt):
 
     response = openai.ChatCompletion.create(
         model=model_engine,
@@ -29,7 +29,8 @@ def generate_response(prompt):
         max_tokens=1024,
         n=2,
         stop=None,
-        temperature=0.3
+        temperature=0.3,
+        user=user
     )
     return response.choices[0].message.content
 
@@ -41,11 +42,11 @@ async def chatgpt(interaction, message: str):
 # Define a function to handle a slash command interaction
 async def ai(interaction, message):
     await interaction.response.defer()
-
+    user = str(interaction.user.id)
     # Get the argument value from the interaction
     argument = 'start your answer with "Actually,".' + message
     # Generate a response using ChatGPT
-    response = generate_response(argument)
+    response = generate_response(user, argument)
     # Send the response back to Discord
 
     await interaction.followup.send(f"*{message}*\n\n{response}")
