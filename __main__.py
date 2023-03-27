@@ -1,7 +1,6 @@
 import discord
 import openai
 import json
-import asyncio
 
 from discord import app_commands
 
