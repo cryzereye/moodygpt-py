@@ -15,14 +15,9 @@ openai.api_key = config["openai"]["SECRET_KEY"]
 
 # Define a function to send a message to ChatGPT and return the response
 def generate_response(user, prompt):
-
     new_msg = {"role": "user", "content": prompt}
-    history = fetch_data(user)
-    print("\n\n")
-    print(history)
+    history = fetch_data(user, new_msg)
     history.append(new_msg)
-    print("\n\n")
-    print(history)
     
     response = openai.ChatCompletion.create(
         model=constants["openai"]["model"],
@@ -35,21 +30,36 @@ def generate_response(user, prompt):
     )
 
     if(response):
-        save_message(user, new_msg)
         save_message(user, {"role" : "assistant", "content" : response.choices[0].message.content})
         return response.choices[0].message.content
     return "Was not able to communicate with ChatGPT"
 
-def fetch_data(user):
-    messages = []
+def fetch_data(user, message):
+    history = []
     if(user in userdata):
-        messages = userdata[user]
-    return messages
+        history = userdata[user]["history"]
+    else:
+        save_message(user, message)
+    return history
 
 def save_message(user, message):
     if(not(user in userdata)):
-        userdata[user] = []
-    userdata[user].append(message)
+        userdata[user] = {"mode" : "reset", "history" : []}
+    userdata[user]["history"].append(message)
 
     with open('config/userdata.json', 'w') as f:
         json.dump(userdata, f)
+
+
+# Mode handling
+def get_mode(mode):
+    if(mode in constants["openai"]["modes"]):
+        return constants["openai"]["modes"][mode]
+    else: []
+
+def append_mode(user, mode):
+    print(mode)
+    mode_messages = get_mode(mode)
+    if(not(userdata[user]["mode"] == mode)):
+        for msg in mode_messages:
+            save_message(user, msg)
