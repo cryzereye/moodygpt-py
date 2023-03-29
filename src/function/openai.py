@@ -22,10 +22,10 @@ def generate_response(user, prompt):
     response = openai.ChatCompletion.create(
         model=constants["openai"]["model"],
         messages=history,
-        max_tokens=1024,
+        max_tokens=4096,
         n=2,
         stop=None,
-        temperature=0.3,
+        temperature=0.7,
         user=user
     )
 
