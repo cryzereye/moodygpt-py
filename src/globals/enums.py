@@ -1,6 +1,6 @@
 import enum
 
-class Modes(enum.Enum):
+class Moods(enum.Enum):
     Insult = "insult"
     UwU = "catgirl"
     BGCConyo = "bgcboi"
