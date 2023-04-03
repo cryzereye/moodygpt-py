@@ -41,7 +41,6 @@ def save_mood(user, mood):
     with open('config/userdata.json', 'w') as f:
         json.dump(userdata, f)
 
-
 # Mood handling
 def get_mood_data(mood):
     if(mood in constants["openai"]["moods"]):
