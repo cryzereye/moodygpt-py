@@ -1,16 +1,14 @@
 {
-    "chatgpt" : 
-        {
-            "name" : "chatgpt",
-            "description" : "Talk with ChatGPT",
-            "parameters": [
-                {
-                    "name": "message",
-                    "description": "Message to ChatGPT",
-                    "type": 3,
-                    "required": true
-                }
-            ]
-        }
-    
+    "chatgpt" : {
+        "name" : "chatgpt",
+        "description" : "Talk with ChatGPT",
+        "parameters": [
+            {
+                "name": "message",
+                "description": "Message to ChatGPT",
+                "type": 3,
+                "required": true
+            }
+        ]
+    }
 }

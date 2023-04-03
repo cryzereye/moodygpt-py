@@ -1,4 +1,4 @@
-from src.function.openai import generate_response, append_mode
+from src.function.openai import generate_response
 
 # Define a function to handle a slash command interaction
 async def chatgpt_process(interaction, message):
@@ -10,9 +10,8 @@ async def chatgpt_process(interaction, message):
 
     await interaction.followup.send(f"*{message}*\n\n{response}")
 
-#Handles mode change for ChatGPT
-async def chatgpt_mode(interaction, mode):
+#Handles mood change for ChatGPT
+async def chatgpt_mood(interaction, mood):
     await interaction.response.defer()
     user = str(interaction.user.id)
-    append_mode(user, mode)
-    await interaction.followup.send(f"ChatGPT {mode} activated")
+    await interaction.followup.send(f"ChatGPT {mood} activated for <@{user}>")
